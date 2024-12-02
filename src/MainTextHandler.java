@@ -17,13 +17,14 @@ public class MainTextHandler {
         System.out.println("Totalt antal tecken: " + counter.getTotalChars());
         System.out.println("Totalt antal rader: " + counter.getTotalLines());
         System.out.println("Totalt antal ord: " + counter.getTotalWords());
+        System.out.println("Längsta ordet: " + counter.getLongestWord());
     }
 
     public void readInput() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String line = scanner.nextLine();
-            if (line.equalsIgnoreCase("stop")) {
+            if (counter.shouldStop(line)) { // Kontrollera stoppvillkoret
                 break;
             }
             counter.count(line);

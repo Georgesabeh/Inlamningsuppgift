@@ -16,11 +16,29 @@ public class TextCounterTest {
         counter.count("Rad 1");
         counter.count("Rad 2");
         assertEquals(2, counter.getTotalLines());
-    }    @Test
+    }
+
+    @Test
     public void testCountWords() {
         TextCounter counter = new TextCounter();
         counter.count("Rad 1");
         counter.count("Rad 2");
         assertEquals(4, counter.getTotalWords());
+    }
+
+    @Test
+    public void testLongestWord() {
+        TextCounter counter = new TextCounter();
+        counter.count("Hej på dig");
+        counter.count("programmering är kul");
+        assertEquals("programmering", counter.getLongestWord());
+    }
+
+    @Test
+    public void testShouldStop() {
+        TextCounter counter = new TextCounter();
+        assertTrue(counter.shouldStop("stop"));
+        assertTrue(counter.shouldStop("STOP"));
+        assertFalse(counter.shouldStop("fortsätt"));
     }
 }

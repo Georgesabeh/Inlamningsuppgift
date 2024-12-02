@@ -2,13 +2,24 @@ public class TextCounter {
     private int totalChars = 0;
     private int totalLines = 0;
     private int totalWords = 0;
+    private String longestWord = "";
 
     public void count(String line) {
-        totalChars += line.length(); // Lägg till antal tecken i raden
-        totalLines++; // Räkna alla rader, även tomma
-        if (!line.isBlank()) { // Om raden inte är tom
-            totalWords += line.trim().split("\\s+").length; // Räkna antal ord
+        totalLines++;
+        totalChars += line.length();
+
+        String[] words = line.split("\\s+"); // Dela upp texten i ord
+        totalWords += words.length;
+
+        for (String word : words) {
+            if (word.length() > longestWord.length()) {
+                longestWord = word;
+            }
         }
+    }
+
+    public boolean shouldStop(String line) {
+        return line.equalsIgnoreCase("stop"); // Kontrollera om raden är "stop"
     }
 
     public int getTotalChars() {
@@ -21,5 +32,9 @@ public class TextCounter {
 
     public int getTotalWords() {
         return totalWords;
+    }
+
+    public String getLongestWord() {
+        return longestWord;
     }
 }
